@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{322a9207-2d67-4fe8-8334-99128931bdbc}</ProjectGuid>
-    <RootNamespace>Skillbox134</RootNamespace>
+    <ProjectGuid>{f762c9df-3d4b-4c81-90e9-82b239bbc7d2}</ProjectGuid>
+    <RootNamespace>Skillbox</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,10 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Skillbox 13.4.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Helpers.h" />
+    <ClCompile Include="Skillbox.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
