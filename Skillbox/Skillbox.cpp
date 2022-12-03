@@ -1,16 +1,61 @@
 ﻿#include <iostream>
-#include <string>
+
+//#define FirstTask
+//#define FirstTaskBrief
+
+void OutputEvenNumbersToLimit(int Limit, bool IsEven);
 
 int main()
 {
-	std::string line;
+	const int N = 10;
 
-	std::cout << "Enter ur string: ";
-	getline(std::cin, line);
+#ifdef FirstTask
+	std::cout << "Even numbers from 0 to " << N << std::endl;
+	for (int i = 1; i < N; ++i)
+	{
+		if ((i % 2) == 0)
+		{
+			std::cout << i << " ";
+		}
+	}
 
-	std::cout << "\n\nUr string: " << line << "\nLength = " << line.length() <<
-		"\n\nFirst symbol: " << line.front() << "\nSecond symbol: " << line.back() << std::endl;
+	std::cout << std::endl;
+#endif // FirstTask
 
+#ifdef FirstTaskBrief
+	std::cout << "Even numbers from 0 to " << N << std::endl;
+	for (int i = 2; i < N; i+=2)
+	{
+		std::cout << i << " ";
+	}
+
+	std::cout << std::endl;
+#endif // FirstTaskBrief
+
+	std::cout << "Even numbers from 0 to " << N << std::endl;
+	OutputEvenNumbersToLimit(N, true);
+
+	std::cout << "\n\nOdd numbers from 0 to " << N << std::endl;
+	OutputEvenNumbersToLimit(N, false);
+	std::cout << std::endl;
 
 	return 0;
+}
+
+void OutputEvenNumbersToLimit(int Limit, bool IsEven)
+{
+	if (IsEven)
+	{
+		for (int i = 2; i < Limit; i+=2)
+		{
+			std::cout << i << " ";
+		}
+	}
+	else
+	{
+		for (int i = 1; i < Limit; i+=2)
+		{
+			std::cout << i << " ";
+		}
+	}
 }
