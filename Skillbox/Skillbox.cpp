@@ -1,66 +1,103 @@
 ﻿#include <iostream>
-#include <cmath>
 
-class Vector
+class Character
 {
 private:
-	double XAxis, YAxis, ZAxis;
+	std::string Name = "*Blank*";
+	int Points = 0;
 
 public:
-	Vector() : XAxis(0), YAxis(0), ZAxis(0) {}
-	Vector(double x, double y, double z) : XAxis(x), YAxis(y), ZAxis(z) {}
 
-	void Set(double x, double y, double z)
+	void SetCharacter(std::string CharacterName, int CharacterPoints)
 	{
-		XAxis = x;
-		YAxis = y;
-		ZAxis - z;
+		Name = CharacterName;
+		Points = CharacterPoints;
 	}
 
-	Vector* GetCopy()
+	std::string GetName()
 	{
-		return this;
+		return Name;
 	}
 
-	void Output()
+	void ChangeName(std::string NewCharacterName)
 	{
-		std::cout << "Vector: (" << XAxis << ',' << YAxis << ',' << ZAxis << ')' << std::endl;
+		Name = NewCharacterName;
 	}
 
-	void OutputXAxis()
+	int GetPoints()
 	{
-		std::cout << "XAxis = " << XAxis << std::endl;
+		return Points;
 	}
 
-	void OutputYAxis()
+	void ChangePoints(int NewCharacterPoints)
 	{
-		std::cout << "YAxis = " << YAxis << std::endl;
+		Points = NewCharacterPoints;
 	}
 
-	void OutputZAxis()
+	void OutputCharacterInfo()
 	{
-		std::cout << "ZAxis = " << ZAxis << std::endl;
-	}
-
-	double CalculateLength()
-	{
-		return sqrt(XAxis * XAxis + YAxis * YAxis + ZAxis * ZAxis);
+		std::cout << "Name: " << Name << ", Points = " << Points << std::endl;
 	}
 
 };
 
+void AscendingOrderSort(Character* Array, int ArrayLength);
+
 int main()
 {
-	Vector A(5, 2, 1);
-	Vector B;
-	Vector* ACopy = A.GetCopy();
+	int CharacterAmount = 0;
+	std::cout << "How many characters do u want to create: ";
+	std::cin >> CharacterAmount;
 
-	A.Output();
-	B.Output();
-	ACopy->Output();
+	Character* CharactersList = new Character[CharacterAmount];
 
-	std::cout << "\nAVector length = " << A.CalculateLength() << std::endl;
-	std::cout << "BVector length = " << B.CalculateLength() << std::endl;
+	std::string TemporaryCharacterName;
+	int TemporaryCharacterPoints;
+
+	std::cout << "\nEnter " << CharacterAmount << " characters:";
+	for (int i = 0; i < CharacterAmount; i++)
+	{
+		std::cout << "\n\t" << i + 1 << "-st character:\n\t\tName: ";
+		std::cin >> TemporaryCharacterName;
+
+		std::cout << "\t\tPoints = ";
+		std::cin >> TemporaryCharacterPoints;
+
+		CharactersList[i].SetCharacter(TemporaryCharacterName, TemporaryCharacterPoints);
+	}
+
+	std::cout << "\nCharacters before sort:\n";
+	for (int i = 0; i < CharacterAmount; i++)
+	{
+		std::cout << "\t" << i + 1 << "-st character: ";
+		CharactersList[i].OutputCharacterInfo();
+	}
+
+	AscendingOrderSort(CharactersList, CharacterAmount);
+
+	std::cout << "\nCharacters after sort:\n";
+	for (int i = 0; i < CharacterAmount; i++)
+	{
+		std::cout << "\t" << i + 1 << "-st character: ";
+		CharactersList[i].OutputCharacterInfo();
+	}
 
 	return 0;
+}
+
+void AscendingOrderSort(Character* Array, int ArrayLength)
+{
+	Character Temporary;
+	for (int i = 0; i < ArrayLength; i++) 
+	{
+		for (int j = (ArrayLength - 1); j >= (i + 1); j--) 
+		{
+			if (Array[j].GetPoints() < Array[j - 1].GetPoints()) 
+			{
+				Temporary = Array[j];
+				Array[j] = Array[j - 1];
+				Array[j - 1] = Temporary;
+			}
+		}
+	}
 }
