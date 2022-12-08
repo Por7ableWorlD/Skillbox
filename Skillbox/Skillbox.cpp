@@ -1,103 +1,47 @@
 ﻿#include <iostream>
 
-class Character
+class Animal
 {
-private:
-	std::string Name = "*Blank*";
-	int Points = 0;
-
 public:
-
-	void SetCharacter(std::string CharacterName, int CharacterPoints)
+	virtual void Voice()
 	{
-		Name = CharacterName;
-		Points = CharacterPoints;
+		std::cout << "*Voice of animal*\n";
 	}
-
-	std::string GetName()
-	{
-		return Name;
-	}
-
-	void ChangeName(std::string NewCharacterName)
-	{
-		Name = NewCharacterName;
-	}
-
-	int GetPoints()
-	{
-		return Points;
-	}
-
-	void ChangePoints(int NewCharacterPoints)
-	{
-		Points = NewCharacterPoints;
-	}
-
-	void OutputCharacterInfo()
-	{
-		std::cout << "Name: " << Name << ", Points = " << Points << std::endl;
-	}
-
 };
 
-void AscendingOrderSort(Character* Array, int ArrayLength);
-
-int main()
+class Dog : public Animal
 {
-	int CharacterAmount = 0;
-	std::cout << "How many characters do u want to create: ";
-	std::cin >> CharacterAmount;
-
-	Character* CharactersList = new Character[CharacterAmount];
-
-	std::string TemporaryCharacterName;
-	int TemporaryCharacterPoints;
-
-	std::cout << "\nEnter " << CharacterAmount << " characters:";
-	for (int i = 0; i < CharacterAmount; i++)
+	void Voice() override
 	{
-		std::cout << "\n\t" << i + 1 << "-st character:\n\t\tName: ";
-		std::cin >> TemporaryCharacterName;
-
-		std::cout << "\t\tPoints = ";
-		std::cin >> TemporaryCharacterPoints;
-
-		CharactersList[i].SetCharacter(TemporaryCharacterName, TemporaryCharacterPoints);
+		std::cout << "Woof!\n";
 	}
+};
 
-	std::cout << "\nCharacters before sort:\n";
-	for (int i = 0; i < CharacterAmount; i++)
+class Cat : public Animal
+{
+	void Voice() override
 	{
-		std::cout << "\t" << i + 1 << "-st character: ";
-		CharactersList[i].OutputCharacterInfo();
+		std::cout << "Meow!\n";
 	}
+};
 
-	AscendingOrderSort(CharactersList, CharacterAmount);
-
-	std::cout << "\nCharacters after sort:\n";
-	for (int i = 0; i < CharacterAmount; i++)
+class Duck : public Animal
+{
+	void Voice() override
 	{
-		std::cout << "\t" << i + 1 << "-st character: ";
-		CharactersList[i].OutputCharacterInfo();
+		std::cout << "Quack-quack!\n";
+	}
+};
+
+int main() 
+{
+	Animal a = Dog();
+	Animal* animals[] { new Dog(), new Cat(), new Duck()};
+
+	for (int i = 0; i < sizeof(animals) / sizeof(animals[0]); i++)
+	{
+		animals[i]->Voice();
 	}
 
 	return 0;
-}
-
-void AscendingOrderSort(Character* Array, int ArrayLength)
-{
-	Character Temporary;
-	for (int i = 0; i < ArrayLength; i++) 
-	{
-		for (int j = (ArrayLength - 1); j >= (i + 1); j--) 
-		{
-			if (Array[j].GetPoints() < Array[j - 1].GetPoints()) 
-			{
-				Temporary = Array[j];
-				Array[j] = Array[j - 1];
-				Array[j - 1] = Temporary;
-			}
-		}
-	}
 }
